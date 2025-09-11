@@ -1,0 +1,33 @@
+package co.edu.uptc.persistance;
+
+import java.io.File;
+import co.edu.uptc.logic.RouteTree;
+import jakarta.xml.bind.JAXBContext;
+import jakarta.xml.bind.Marshaller;
+import jakarta.xml.bind.Unmarshaller;
+
+public class RoutePersistance {
+    public static void guardar(RouteTree tree, String filePath) {
+        try {
+            JAXBContext context = JAXBContext.newInstance(RouteTree.class);
+            Marshaller marshaller = context.createMarshaller();
+            marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true); // bonito
+
+            marshaller.marshal(tree, new File(filePath)); // Guardar en archivo
+            System.out.println("Árbol guardado en " + filePath);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static RouteTree cargar(String filePath) {
+        try {
+            JAXBContext context = JAXBContext.newInstance(RouteTree.class);
+            Unmarshaller unmarshaller = context.createUnmarshaller();
+            return (RouteTree) unmarshaller.unmarshal(new File(filePath));
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+}
