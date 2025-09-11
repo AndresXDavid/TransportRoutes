@@ -48,8 +48,12 @@ public class RouteView {
     public void showRoutes(List<Station> routes) {
         System.out.println("===== RUTAS =====");
         for (Station route : routes) {
-            System.out.println("Nombre: " + route.getName() + ", Código: " + route.getCode() + ", Ubicación: " + route.getLocation());
+            System.out.println(showRoute(route));
         }
+    }
+
+    public String showRoute(Station route) {
+        return ("Nombre: " + route.getName() + ", Código: " + route.getCode() + ", Ubicación: " + route.getLocation());
     }
 
     public String requestSearchCode() {

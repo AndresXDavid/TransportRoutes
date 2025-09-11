@@ -36,7 +36,7 @@ public class RouteController {
                     String code = view.requestSearchCode();
                     Station station = logic.search(code);
                     if (station != null) {
-                        view.showMessage("Ruta encontrada: " + station);
+                        view.showMessage("Ruta encontrada: " + view.showRoute(station));
                     } else {
                         view.showMessage("No se encontró la ruta con código: " + code);
                     }
