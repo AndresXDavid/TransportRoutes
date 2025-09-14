@@ -1,12 +1,18 @@
-package co.edu.uptc.logic;
+package co.edu.uptc.model;
 
 import jakarta.xml.bind.annotation.XmlAccessorType;
+import jakarta.xml.bind.annotation.XmlElement;
 import jakarta.xml.bind.annotation.XmlAccessType;
 
 @XmlAccessorType(XmlAccessType.FIELD)
 public class Station {
+    @XmlElement
     private String name;
+
+    @XmlElement
     private String code;
+
+    @XmlElement
     private String location;
 
     public Station() {}

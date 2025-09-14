@@ -1,7 +1,8 @@
 package co.edu.uptc.persistance;
 
 import java.io.File;
-import co.edu.uptc.logic.RouteTree;
+
+import co.edu.uptc.controller.RouteTree;
 import jakarta.xml.bind.JAXBContext;
 import jakarta.xml.bind.Marshaller;
 import jakarta.xml.bind.Unmarshaller;
@@ -24,6 +25,7 @@ public class RoutePersistance {
         try {
             JAXBContext context = JAXBContext.newInstance(RouteTree.class);
             Unmarshaller unmarshaller = context.createUnmarshaller();
+            System.out.println("Intentando cargar: " + filePath);
             return (RouteTree) unmarshaller.unmarshal(new File(filePath));
         } catch (Exception e) {
             e.printStackTrace();

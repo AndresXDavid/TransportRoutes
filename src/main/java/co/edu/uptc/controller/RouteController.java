@@ -2,9 +2,8 @@ package co.edu.uptc.controller;
 
 import java.util.List;
 
-import co.edu.uptc.interfaz.RouteView;
-import co.edu.uptc.logic.RouteTree;
-import co.edu.uptc.logic.Station;
+import co.edu.uptc.model.Station;
+import co.edu.uptc.viewController.RouteView;
 
 public class RouteController {
     private RouteView view;
@@ -25,11 +24,11 @@ public class RouteController {
                     addRoute(routeData.get(0), routeData.get(1), routeData.get(2), routeData.get(3));
                     break;
                 case 2: // Mostrar rutas
-                    List<Station> routes = logic.getAllRoutes();
-                    if (routes.isEmpty()) {
+                    List<String> lines = logic.getRoutesHierarchySimple(); // o getRoutesHierarchySimple()
+                    if (lines.isEmpty()) {
                         view.showMessage("No hay rutas registradas.");
                     } else {
-                        view.showRoutes(routes);
+                        view.showHierarchy(lines);
                     }
                     break;
                 case 3: // Buscar ruta

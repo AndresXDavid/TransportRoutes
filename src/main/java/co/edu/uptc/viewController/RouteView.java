@@ -1,9 +1,9 @@
-package co.edu.uptc.interfaz;
+package co.edu.uptc.viewController;
 
 import java.util.List;
 import java.util.Scanner;
 
-import co.edu.uptc.logic.Station;
+import co.edu.uptc.model.Station;
 
 public class RouteView {
     private Scanner scanner;
@@ -60,5 +60,13 @@ public class RouteView {
         System.out.print("Ingrese el código de la ruta a buscar: ");
         return scanner.nextLine();
     }
+
+    public void showHierarchy(List<String> lines) {
+        System.out.println("===== RUTAS =====");
+        for (String l : lines) {
+            System.out.println(l);
+        }
+    }
+
 }
 

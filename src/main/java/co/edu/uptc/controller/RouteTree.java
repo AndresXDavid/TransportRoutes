@@ -1,19 +1,24 @@
-package co.edu.uptc.logic;
+package co.edu.uptc.controller;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import co.edu.uptc.model.Node;
+import co.edu.uptc.model.Station;
 import co.edu.uptc.persistance.RoutePersistance;
 import jakarta.xml.bind.annotation.XmlAccessType;
 import jakarta.xml.bind.annotation.XmlAccessorType;
+import jakarta.xml.bind.annotation.XmlElement;
 import jakarta.xml.bind.annotation.XmlRootElement;
 
 @XmlRootElement(name = "routeTree")
 @XmlAccessorType(XmlAccessType.FIELD)
 public class RouteTree {
-    private Node root;
 
-    private static final String FILE_PATH = "src/main/resources/co/edu/uptc/routes.xml";
+    @XmlElement(name = "root")
+    private Node root;
+    private static final String FILE_PATH = "src/main/resources-data/routes.xml";
+    
 
     public RouteTree() {
         // Intentar cargar desde XML al crear el árbol
@@ -23,6 +28,25 @@ public class RouteTree {
         } else {
             // si no existe el archivo, inicializar con raíz base
             root = null;
+        }
+    }
+
+    public List<String> getRoutesHierarchySimple() {
+        List<String> lines = new ArrayList<>();
+        buildSimple(root, 0, lines);
+        return lines;
+    }
+
+    private void buildSimple(Node node, int depth, List<String> lines) {
+        if (node == null || node.getStation() == null) return;
+        String indent = "  ".repeat(Math.max(0, depth));
+        String line = indent + "Nombre: " + node.getStation().getName()
+            + ", Código: " + node.getStation().getCode()
+            + ", Ubicación: " + node.getStation().getLocation();
+        lines.add(line);
+        if (node.getChildren() == null) return;
+        for (Node child : node.getChildren()) {
+            buildSimple(child, depth + 1, lines);
         }
     }
 
