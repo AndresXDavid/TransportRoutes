@@ -40,8 +40,7 @@ public class RouteTree {
     private void buildSimple(Node node, int depth, List<String> lines) {
         if (node == null || node.getStation() == null) return;
         String indent = "  ".repeat(Math.max(0, depth));
-        String line = indent + "Nombre: " + node.getStation().getName()
-            + ", Código: " + node.getStation().getCode()
+        String line = indent + "Codigo: " + node.getStation().getCode()
             + ", Ubicación: " + node.getStation().getLocation();
         lines.add(line);
         if (node.getChildren() == null) return;
@@ -66,6 +65,11 @@ public class RouteTree {
     }
 
     private boolean insertRec(Node current, Station newStation, String parentCode) {
+        if (current == null) return false;
+        
+        if (existsRec(root, newStation.getCode())) {
+            return false;
+        }
         if (current.getStation().getCode().equals(parentCode)) {
             Node child = new Node(newStation);
             current.addChild(child);
@@ -134,6 +138,21 @@ public class RouteTree {
             }
         }
         return null;
+    }
+
+    private boolean existsRec(Node current, String code) {
+        if (current == null) return false;
+
+        if (current.getStation().getCode().equals(code)) {
+            return true;
+        }
+
+        for (Node child : current.getChildren()) {
+            if (existsRec(child, code)) {
+                return true;
+            }
+        }
+        return false;
     }
 
     // Obtener lista de rutas

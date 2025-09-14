@@ -2,23 +2,20 @@
 <routeTree>
     <root>
         <station>
-            <name>R1</name>
-            <code>1</code>
+            <code>duitama1</code>
             <location>Duitama</location>
         </station>
         <children>
             <node>
                 <station>
-                    <name>R2</name>
-                    <code>2</code>
-                    <location>Sogamoso</location>
+                    <code>paipa1</code>
+                    <location>Paipa</location>
                 </station>
                 <children>
                     <node>
                         <station>
-                            <name>R4</name>
-                            <code>4</code>
-                            <location>Yopal</location>
+                            <code>tunja1</code>
+                            <location>Tunja</location>
                         </station>
                         <children/>
                     </node>
@@ -26,16 +23,29 @@
             </node>
             <node>
                 <station>
-                    <name>R3</name>
-                    <code>3</code>
-                    <location>Paipa</location>
+                    <code>tibasosa1</code>
+                    <location>Tibasosa</location>
                 </station>
                 <children>
                     <node>
                         <station>
-                            <name>R4</name>
-                            <code>4</code>
-                            <location>Tunja</location>
+                            <code>sogamoso1</code>
+                            <location>Sogamoso</location>
+                        </station>
+                        <children/>
+                    </node>
+                </children>
+            </node>
+            <node>
+                <station>
+                    <code>nobsa1</code>
+                    <location>Nobsa</location>
+                </station>
+                <children>
+                    <node>
+                        <station>
+                            <code>sogamoso2</code>
+                            <location>Sogamoso</location>
                         </station>
                         <children/>
                     </node>

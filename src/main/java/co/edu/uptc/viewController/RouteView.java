@@ -13,7 +13,7 @@ public class RouteView {
     }
 
     public int showMenu() {
-        System.out.println("===== MENÚ PRINCIPAL =====");
+        System.out.println("===== MENU PRINCIPAL =====");
         System.out.println("1. Agregar Estacion");
         System.out.println("2. Mostrar Estaciones");
         System.out.println("3. Buscar Ruta Mas Corta");
@@ -26,19 +26,16 @@ public class RouteView {
     }
 
     public List<String> requestRouteData() {
-        System.out.println("Nombre de la Estacion: ");
-        String name = scanner.nextLine();
-
-        System.out.println("Código de la Estacion: ");
+        System.out.println("Codigo de la Estacion: ");
         String code = scanner.nextLine();
 
         System.out.println("Ubicación de la Estacion: ");
         String location = scanner.nextLine();
 
-        System.out.println("Código de la Estacion Padre: ");
+        System.out.println("Codigo de la Estacion Padre: ");
         String parentCode = scanner.nextLine();
 
-        return List.of(name, code, location, parentCode);
+        return List.of(code, location, parentCode);
     }
 
     public void showMessage(String message) {
@@ -53,13 +50,13 @@ public class RouteView {
     }
 
     public String showRoute(Station route) {
-        return ("Nombre: " + route.getName() + ", Código: " + route.getCode() + ", Ubicación: " + route.getLocation());
+        return ("Codigo: " + route.getCode() + ", Ubicación: " + route.getLocation());
     }
 
     public List<String> requestSearchLocation() {
-        System.out.print("Ingrese el Nombre de la Estacion de Partida: ");
+        System.out.print("Ingrese la Ubicacion de la Estacion de Partida: ");
         String start = scanner.nextLine();
-        System.out.print("Ingrese el Nombre de la Estacion de Llegada: ");
+        System.out.print("Ingrese la Ubicacion de la Estacion de Llegada: ");
         String end = scanner.nextLine();
         return List.of(start, end);
     }
