@@ -28,9 +28,18 @@
                 <station>
                     <name>R3</name>
                     <code>3</code>
-                    <location>Tunja</location>
+                    <location>Paipa</location>
                 </station>
-                <children/>
+                <children>
+                    <node>
+                        <station>
+                            <name>R4</name>
+                            <code>4</code>
+                            <location>Tunja</location>
+                        </station>
+                        <children/>
+                    </node>
+                </children>
             </node>
         </children>
     </root>

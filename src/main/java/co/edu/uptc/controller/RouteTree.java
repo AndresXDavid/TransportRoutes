@@ -80,21 +80,58 @@ public class RouteTree {
         return false;
     }
 
-    // Buscar estación por código
-    public Station search(String code) {
-        return searchRec(root, code);
-    }
+    // Buscar la ruta mas corta entre dos ubicaciones
+    public List<Station> searchShortRoute(String startLocation, String endLocation) {
+        List<Node> pathOrigin = searchRec(root, startLocation); // buscar solo la estación de inicio
+        List<Node> pathDest = searchRec(root, endLocation); // buscar solo la estación de fin
 
-    private Station searchRec(Node current, String code) {
+        if (pathOrigin == null || pathDest == null) {
+            return null; // alguna estación no existe
+        }
+
+        // Encontrar ancestro común más cercano
+        int i = 0;
+        while (i < pathOrigin.size() && i < pathDest.size()
+                    && pathOrigin.get(i).getStation().getLocation().equals(pathDest.get(i).getStation().getLocation())) {
+                i++;
+            }
+        i--; // último ancestro común
+
+        // Construir ruta: subir desde origen al ancestro + bajar hacia destino
+        List<Station> route = new ArrayList<>();
+
+        // Subir desde origen hasta ancestro (sin incluir ancestro)
+        for (int j = pathOrigin.size() - 1; j > i; j--) {
+            route.add(pathOrigin.get(j).getStation());
+        }
+
+        // Agregar ancestro común
+        route.add(pathOrigin.get(i).getStation());
+
+        // Bajar hacia destino (empezando después del ancestro)
+        for (int j = i + 1; j < pathDest.size(); j++) {
+            route.add(pathDest.get(j).getStation());
+        }
+
+        return route;
+    }
+    
+
+    private List<Node> searchRec(Node current, String location) {
         if (current == null) return null;
 
-        if (current.getStation().getCode().equals(code)) {
-            return current.getStation();
+        if (current.getStation().getLocation().equals(location)) {
+            List<Node> path = new ArrayList<>();
+            path.add(current);
+            return path;
         }
 
         for (Node child : current.getChildren()) {
-            Station found = searchRec(child, code);
-            if (found != null) return found;
+            List<Node> subPath = searchRec(child, location);
+            if (subPath != null){
+                subPath.add(0, current); // Insertar al inicio para mantener el orden desde la raíz
+                return subPath;
+            }
         }
         return null;
     }

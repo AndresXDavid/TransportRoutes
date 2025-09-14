@@ -15,7 +15,6 @@ public class RoutePersistance {
             marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true); // bonito
 
             marshaller.marshal(tree, new File(filePath)); // Guardar en archivo
-            System.out.println("Árbol guardado en " + filePath);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -25,7 +24,6 @@ public class RoutePersistance {
         try {
             JAXBContext context = JAXBContext.newInstance(RouteTree.class);
             Unmarshaller unmarshaller = context.createUnmarshaller();
-            System.out.println("Intentando cargar: " + filePath);
             return (RouteTree) unmarshaller.unmarshal(new File(filePath));
         } catch (Exception e) {
             e.printStackTrace();

@@ -2,6 +2,7 @@ package co.edu.uptc.controller;
 
 import java.util.List;
 
+import co.edu.uptc.model.Node;
 import co.edu.uptc.model.Station;
 import co.edu.uptc.viewController.RouteView;
 
@@ -31,13 +32,13 @@ public class RouteController {
                         view.showHierarchy(lines);
                     }
                     break;
-                case 3: // Buscar ruta
-                    String code = view.requestSearchCode();
-                    Station station = logic.search(code);
-                    if (station != null) {
-                        view.showMessage("Ruta encontrada: " + view.showRoute(station));
+                case 3: // Buscar ruta mas corta
+                    List<String> route = view.requestSearchLocation();
+                    List<Station> shortestRoute = logic.searchShortRoute(route.get(0), route.get(1));
+                    if (shortestRoute != null) {
+                        view.showRoutes(shortestRoute);
                     } else {
-                        view.showMessage("No se encontró la ruta con código: " + code);
+                        view.showMessage("No se encontró la estacion: " + route.get(0) + " o " + route.get(1));
                     }
                     break;
                 case 4: // Salir

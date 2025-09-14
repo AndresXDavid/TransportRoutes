@@ -14,9 +14,9 @@ public class RouteView {
 
     public int showMenu() {
         System.out.println("===== MENÚ PRINCIPAL =====");
-        System.out.println("1. Agregar Ruta");
-        System.out.println("2. Mostrar Rutas");
-        System.out.println("3. Buscar Ruta");
+        System.out.println("1. Agregar Estacion");
+        System.out.println("2. Mostrar Estaciones");
+        System.out.println("3. Buscar Ruta Mas Corta");
         System.out.println("4. Salir");
         System.out.print("Seleccione una opción: ");
 
@@ -26,16 +26,16 @@ public class RouteView {
     }
 
     public List<String> requestRouteData() {
-        System.out.println("Nombre de la ruta: ");
+        System.out.println("Nombre de la Estacion: ");
         String name = scanner.nextLine();
 
-        System.out.println("Código de la ruta: ");
+        System.out.println("Código de la Estacion: ");
         String code = scanner.nextLine();
 
-        System.out.println("Ubicación de la ruta: ");
+        System.out.println("Ubicación de la Estacion: ");
         String location = scanner.nextLine();
 
-        System.out.println("Código de la ruta padre (si no tiene, deje vacío): ");
+        System.out.println("Código de la Estacion Padre: ");
         String parentCode = scanner.nextLine();
 
         return List.of(name, code, location, parentCode);
@@ -46,7 +46,7 @@ public class RouteView {
     }
 
     public void showRoutes(List<Station> routes) {
-        System.out.println("===== RUTAS =====");
+        System.out.println("===== Ruta Mas Corta =====");
         for (Station route : routes) {
             System.out.println(showRoute(route));
         }
@@ -56,13 +56,16 @@ public class RouteView {
         return ("Nombre: " + route.getName() + ", Código: " + route.getCode() + ", Ubicación: " + route.getLocation());
     }
 
-    public String requestSearchCode() {
-        System.out.print("Ingrese el código de la ruta a buscar: ");
-        return scanner.nextLine();
+    public List<String> requestSearchLocation() {
+        System.out.print("Ingrese el Nombre de la Estacion de Partida: ");
+        String start = scanner.nextLine();
+        System.out.print("Ingrese el Nombre de la Estacion de Llegada: ");
+        String end = scanner.nextLine();
+        return List.of(start, end);
     }
 
     public void showHierarchy(List<String> lines) {
-        System.out.println("===== RUTAS =====");
+        System.out.println("===== Estaciones =====");
         for (String l : lines) {
             System.out.println(l);
         }
