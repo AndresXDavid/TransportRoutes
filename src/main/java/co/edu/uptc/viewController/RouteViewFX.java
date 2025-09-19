@@ -1,56 +1,69 @@
 package co.edu.uptc.viewController;
 
 import java.util.List;
+import java.util.Locale;
+import java.util.ResourceBundle;
 
 import co.edu.uptc.controller.RouteController;
 import javafx.application.Application;
+import javafx.geometry.Insets;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
-import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.*;
 import javafx.stage.Stage;
 
 public class RouteViewFX extends Application {
 
     private TreeView<String> treeView;
     private TextArea output;
-    private RouteController controller; // 👈 referencia al controlador
+    private RouteController controller;
+    private ResourceBundle bundle;
+
+    // Botones para actualizarlos cuando cambie el idioma
+    private Button addButton;
+    private Button showButton;
+    private Button searchButton;
+    private Button exitButton;
+
+    private ComboBox<String> languageCombo;
 
     @Override
     public void start(Stage primaryStage) {
-        primaryStage.setTitle("Sistema de Rutas");
+        // Idioma inicial
+        setLanguage(new Locale("es"));
 
-        // Instanciar el controlador y pasarle la vista
+        primaryStage.setTitle(bundle.getString("app.title"));
+
+        // Instanciar el controlador
         controller = new RouteController(this);
 
-        // Árbol donde se mostrarán las rutas
+        // Árbol de rutas
         treeView = new TreeView<>();
         treeView.setPrefWidth(300);
 
-        // Área de mensajes (como consola dentro de la app)
+        // Consola de mensajes
         output = new TextArea();
         output.setEditable(false);
 
         // Botones
-        Button addButton = new Button("Agregar ruta");
-        Button showButton = new Button("Mostrar rutas");
-        Button searchButton = new Button("Buscar ruta corta");
-        Button exitButton = new Button("Salir");
+        addButton = new Button();
+        showButton = new Button();
+        searchButton = new Button();
+        exitButton = new Button();
+
+        updateTexts(); // Inicializar textos según idioma
 
         // Acción: agregar ruta
         addButton.setOnAction(e -> {
             TextInputDialog dialog = new TextInputDialog();
-            dialog.setHeaderText("Agregar ruta");
-            dialog.setContentText("Formato: código, ubicación, padre");
+            dialog.setHeaderText(bundle.getString("dialog.add.header"));
+            dialog.setContentText(bundle.getString("dialog.add.content"));
             dialog.showAndWait().ifPresent(data -> {
                 String[] parts = data.split(",");
                 if (parts.length == 3) {
-                    controller.addRoute(
-                        parts[0].trim(),
-                        parts[1].trim(),
-                        parts[2].trim()
-                    );
+                    controller.addRoute(parts[0].trim(), parts[1].trim(), parts[2].trim());
                 } else {
-                    showMessage("Formato inválido. Ejemplo: tunja1, Tunja, paipa1");
+                    showMessage(bundle.getString("error.format.add"));
                 }
             });
         });
@@ -61,14 +74,14 @@ public class RouteViewFX extends Application {
         // Acción: buscar ruta más corta
         searchButton.setOnAction(e -> {
             TextInputDialog dialog = new TextInputDialog();
-            dialog.setHeaderText("Buscar ruta más corta");
-            dialog.setContentText("Formato: origen, destino");
+            dialog.setHeaderText(bundle.getString("dialog.search.header"));
+            dialog.setContentText(bundle.getString("dialog.search.content"));
             dialog.showAndWait().ifPresent(data -> {
                 String[] parts = data.split(",");
                 if (parts.length == 2) {
                     controller.searchShortestRoute(parts[0].trim(), parts[1].trim());
                 } else {
-                    showMessage("Formato inválido. Ejemplo: Duitama, Tunja");
+                    showMessage(bundle.getString("error.format.search"));
                 }
             });
         });
@@ -78,19 +91,49 @@ public class RouteViewFX extends Application {
 
         ToolBar toolBar = new ToolBar(addButton, showButton, searchButton, exitButton);
 
+        // ComboBox de idiomas
+        languageCombo = new ComboBox<>();
+        languageCombo.getItems().addAll("Español", "English");
+        languageCombo.setValue("Español"); // por defecto
+        languageCombo.setOnAction(e -> {
+            if (languageCombo.getValue().equals("English")) {
+                setLanguage(Locale.ENGLISH);
+            } else {
+                setLanguage(new Locale("es"));
+            }
+            primaryStage.setTitle(bundle.getString("app.title"));
+            updateTexts();
+        });
+
+        HBox topBar = new HBox(10, toolBar, new Label("Idioma:"), languageCombo);
+        topBar.setPadding(new Insets(5));
+
         BorderPane root = new BorderPane();
-        root.setTop(toolBar);
+        root.setTop(topBar);
         root.setCenter(treeView);
         root.setBottom(output);
 
-        Scene scene = new Scene(root, 700, 450);
+        Scene scene = new Scene(root, 750, 480);
         primaryStage.setScene(scene);
         primaryStage.show();
     }
 
+    // Cambiar idioma
+    private void setLanguage(Locale locale) {
+        bundle = ResourceBundle.getBundle("co.edu.uptc.i18n.messages", locale);
+    }
+
+    // Actualizar textos dinámicamente
+    private void updateTexts() {
+        addButton.setText(bundle.getString("button.add"));
+        showButton.setText(bundle.getString("button.show"));
+        searchButton.setText(bundle.getString("button.search"));
+        exitButton.setText(bundle.getString("button.exit"));
+    }
+
     // Mostrar jerarquía en el TreeView
     public void showHierarchy(List<String> lines) {
-        TreeItem<String> rootItem = new TreeItem<>("Rutas");
+        TreeItem<String> rootItem = new TreeItem<>(bundle.getString("tree.root"));
         rootItem.setExpanded(true);
         for (String line : lines) {
             rootItem.getChildren().add(new TreeItem<>(line));
@@ -98,14 +141,14 @@ public class RouteViewFX extends Application {
         treeView.setRoot(rootItem);
     }
 
-    // Mostrar mensajes en el área inferior
+    // Mostrar mensajes
     public void showMessage(String message) {
         output.appendText(message + "\n");
     }
 
-    // Mostrar rutas específicas (ej: ruta más corta)
+    // Mostrar rutas específicas
     public void showRoutes(List<?> stations) {
-        output.appendText("Ruta encontrada:\n");
+        output.appendText(bundle.getString("route.found") + "\n");
         for (Object station : stations) {
             output.appendText(" -> " + station.toString() + "\n");
         }
