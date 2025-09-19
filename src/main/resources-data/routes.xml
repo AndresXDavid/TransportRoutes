@@ -32,7 +32,15 @@
                             <code>sogamoso1</code>
                             <location>Sogamoso</location>
                         </station>
-                        <children/>
+                        <children>
+                            <node>
+<station>
+    <code>yopal1</code>
+    <location>Yopal</location>
+</station>
+<children/>
+                            </node>
+                        </children>
                     </node>
                 </children>
             </node>

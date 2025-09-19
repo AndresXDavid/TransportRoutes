@@ -45,12 +45,13 @@ public class RouteView {
     public void showRoutes(List<Station> routes) {
         System.out.println("===== Ruta Mas Corta =====");
         for (Station route : routes) {
-            System.out.println(showRoute(route));
+            System.out.print(showRoute(route) + " -> ");
         }
+        System.out.println();
     }
 
     public String showRoute(Station route) {
-        return ("Codigo: " + route.getCode() + ", Ubicación: " + route.getLocation());
+        return (route.getLocation() + " (" + route.getCode() + ")");
     }
 
     public List<String> requestSearchLocation() {

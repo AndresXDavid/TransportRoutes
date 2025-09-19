@@ -1,4 +1,4 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" 
+<project xmlns="http://maven.apache.org/POM/4.0.0"
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 
@@ -10,8 +10,12 @@
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <maven.compiler.source>24</maven.compiler.source>
-        <maven.compiler.target>24</maven.compiler.target>
+        <!-- Compilar siempre con la versión del JDK actual -->
+        <maven.compiler.release>${maven.compiler.release.version}</maven.compiler.release>
+        <maven.compiler.source>${maven.compiler.release.version}</maven.compiler.source>
+        <maven.compiler.target>${maven.compiler.release.version}</maven.compiler.target>
+        <!-- Valor por defecto si no se pasa desde la consola -->
+        <maven.compiler.release.version>17</maven.compiler.release.version>
     </properties>
 
     <dependencies>
@@ -42,13 +46,14 @@
 
     <build>
         <plugins>
-            <!-- Compilador con Java 24 -->
+            <!-- Compilador -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
                 <version>3.11.0</version>
                 <configuration>
-                    <release>24</release>
+                    <!-- Usa la versión configurada dinámicamente -->
+                    <release>${maven.compiler.release.version}</release>
                 </configuration>
             </plugin>
 
@@ -59,6 +64,9 @@
                 <version>0.0.8</version>
                 <configuration>
                     <mainClass>co.edu.uptc.App</mainClass>
+                    <options>
+                        <option>--enable-native-access=javafx.graphics</option>
+                    </options>
                 </configuration>
             </plugin>
         </plugins>
