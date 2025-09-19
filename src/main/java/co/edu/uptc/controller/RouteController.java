@@ -91,12 +91,7 @@ public class RouteController {
 
     // Acción: mostrar todas las rutas
     public void updateHierarchy() {
-        List<String> lines = logic.getRoutesHierarchySimple();
-        if (lines.isEmpty()) {
-            view.showMessage("No hay rutas registradas.");
-        } else {
-            view.showHierarchy(lines);
-        }
+        view.showHierarchy(RouteConverter.buildTree(logic.getRoot()));
     }
 
     // Acción: buscar ruta más corta

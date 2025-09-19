@@ -31,24 +31,6 @@ public class RouteTree {
         }
     }
 
-    public List<String> getRoutesHierarchySimple() {
-        List<String> lines = new ArrayList<>();
-        buildSimple(root, 0, lines);
-        return lines;
-    }
-
-    private void buildSimple(Node node, int depth, List<String> lines) {
-        if (node == null || node.getStation() == null) return;
-        String indent = "  ".repeat(Math.max(0, depth));
-        String line = indent + "Codigo: " + node.getStation().getCode()
-            + ", Ubicación: " + node.getStation().getLocation();
-        lines.add(line);
-        if (node.getChildren() == null) return;
-        for (Node child : node.getChildren()) {
-            buildSimple(child, depth + 1, lines);
-        }
-    }
-
     // Insertar un nuevo nodo en el árbol
     public boolean insert(Station newStation, String parentCode) {
         if (root == null) {

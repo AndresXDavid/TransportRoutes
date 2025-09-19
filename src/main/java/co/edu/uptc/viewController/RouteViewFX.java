@@ -132,12 +132,8 @@ public class RouteViewFX extends Application {
     }
 
     // Mostrar jerarquía en el TreeView
-    public void showHierarchy(List<String> lines) {
-        TreeItem<String> rootItem = new TreeItem<>(bundle.getString("tree.root"));
+    public void showHierarchy(TreeItem rootItem) {
         rootItem.setExpanded(true);
-        for (String line : lines) {
-            rootItem.getChildren().add(new TreeItem<>(line));
-        }
         treeView.setRoot(rootItem);
     }
 
