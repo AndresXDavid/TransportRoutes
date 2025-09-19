@@ -150,8 +150,9 @@ public class RouteViewFX extends Application {
     public void showRoutes(List<?> stations) {
         output.appendText(bundle.getString("route.found") + "\n");
         for (Object station : stations) {
-            output.appendText(" -> " + station.toString() + "\n");
+            output.appendText(" -> " + station.toString());
         }
+        output.appendText("\n");
     }
 
     public static void main(String[] args) {
