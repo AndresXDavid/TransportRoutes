@@ -20,7 +20,7 @@ import jakarta.xml.bind.Unmarshaller;
  * 
  * @author TuNombre
  */
-public class RoutePersistence implements RouteDAO {
+public class XmlRouteDAO implements RouteDAO {
 
     /**
      * {@inheritDoc}

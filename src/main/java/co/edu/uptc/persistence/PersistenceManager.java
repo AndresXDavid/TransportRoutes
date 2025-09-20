@@ -11,7 +11,7 @@ package co.edu.uptc.persistence;
  * {@link PersistenceManager}, facilitando la centralización de la
  * gestión de la persistencia.</p>
  * 
- * <p>Por defecto, utiliza {@link RoutePersistence}, pero puede inyectarse
+ * <p>Por defecto, utiliza {@link XmlRouteDAO}, pero puede inyectarse
  * otra implementación con {@link #setRouteDAO(RouteDAO)}.</p>
  * 
  * @author TuNombre
@@ -26,10 +26,10 @@ public class PersistenceManager {
     /**
      * Constructor privado para evitar instanciación externa.
      * 
-     * <p>Por defecto, se inicializa con {@link RoutePersistence}.</p>
+     * <p>Por defecto, se inicializa con {@link XmlRouteDAO}.</p>
      */
     private PersistenceManager() {
-        this.routeDAO = new RoutePersistence();
+        this.routeDAO = new XmlRouteDAO();
     }
 
     /**
