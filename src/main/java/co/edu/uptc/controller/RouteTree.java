@@ -5,7 +5,7 @@ import java.util.List;
 
 import co.edu.uptc.model.Node;
 import co.edu.uptc.model.Station;
-import co.edu.uptc.persistence.RoutePersistence;
+import co.edu.uptc.persistence.PersistenceManager;
 import jakarta.xml.bind.annotation.XmlAccessType;
 import jakarta.xml.bind.annotation.XmlAccessorType;
 import jakarta.xml.bind.annotation.XmlElement;
@@ -18,13 +18,11 @@ public class RouteTree {
     @XmlElement(name = "root")
     private Node root;
     private static final String FILE_PATH = "src/main/resources-data/routes.xml";
-
-    private RoutePersistence persistence = new RoutePersistence();
     
 
     public RouteTree() {
         // Intentar cargar desde XML al crear el árbol
-        RouteTree loaded = persistence.cargar(FILE_PATH);
+        RouteTree loaded = PersistenceManager.getInstance().getRouteDAO().cargar(FILE_PATH);
         if (loaded != null) {
             this.root = loaded.getRoot();
         } else {
@@ -160,7 +158,7 @@ public class RouteTree {
 
     // Guardar árbol en XML
     public void save(){
-        persistence.guardar(this, FILE_PATH);
+        PersistenceManager.getInstance().getRouteDAO().guardar(this, FILE_PATH);
     }
 
     // --- Getters y setters ---
