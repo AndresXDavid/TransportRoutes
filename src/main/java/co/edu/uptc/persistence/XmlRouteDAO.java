@@ -12,7 +12,7 @@ import jakarta.xml.bind.Unmarshaller;
  * serialización y deserialización de objetos {@link RouteTree}
  * en formato XML.
  * 
- * <p>Permite guardar y cargar árboles de rutas desde archivos XML,
+ * <p>Permite save y load árboles de rutas desde archivos XML,
  * manteniendo una representación estructurada y legible de los datos.</p>
  * 
  * <p>Esta clase aplica el patrón DAO (Data Access Object), separando
@@ -28,7 +28,7 @@ public class XmlRouteDAO implements RouteDAO {
      * <p>Convierte el {@link RouteTree} en XML y lo almacena en el archivo especificado.</p>
      */
     @Override
-    public void guardar(RouteTree tree, String filePath) {
+    public void save(RouteTree tree, String filePath) {
         try {
             JAXBContext context = JAXBContext.newInstance(RouteTree.class);
             Marshaller marshaller = context.createMarshaller();
@@ -47,7 +47,7 @@ public class XmlRouteDAO implements RouteDAO {
      * en un objeto {@link RouteTree}.</p>
      */
     @Override
-    public RouteTree cargar(String filePath) {
+    public RouteTree load(String filePath) {
         try {
             JAXBContext context = JAXBContext.newInstance(RouteTree.class);
             Unmarshaller unmarshaller = context.createUnmarshaller();

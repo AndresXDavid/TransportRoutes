@@ -22,7 +22,7 @@ public class RouteTree {
 
     public RouteTree() {
         // Intentar cargar desde XML al crear el árbol
-        RouteTree loaded = PersistenceManager.getInstance().getRouteDAO().cargar(FILE_PATH);
+        RouteTree loaded = PersistenceManager.getInstance().getRouteDAO().load(FILE_PATH);
         if (loaded != null) {
             this.root = loaded.getRoot();
         } else {
@@ -156,9 +156,71 @@ public class RouteTree {
         }
     }
 
+    // Eliminar un nodo dado su código
+    public boolean deleteStation(String code) {
+        if (root == null) return false;
+
+        // Si la raíz es la que queremos eliminar
+        if (root.getStation().getCode().equals(code)) {
+            root = null;
+            save();
+            return true;
+        }
+
+        boolean removed = removeRec(root, code);
+        if (removed) save();
+        return removed;
+    }
+
+    private boolean removeRec(Node parent, String code) {
+        for (Node child : parent.getChildren()) {
+            if (child.getStation().getCode().equals(code)) {
+                parent.getChildren().remove(child);
+                return true;
+            }
+            if (removeRec(child, code)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    // Editar una estación existente por su código
+    public boolean editStation(String code, String newStationLocation, String newStationCode) {
+        Node node = findNode(root, code);
+        if (node == null) {
+            return false; // no existe la estación a editar
+        }
+
+        // Verificar duplicado SOLO si el código cambia
+        if (!code.equals(newStationCode) && existsRec(root, newStationCode)) {
+            return false; // ya existe otra estación con ese código
+        }
+
+        // Actualizar los datos
+        node.getStation().setLocation(newStationLocation);
+        node.getStation().setCode(newStationCode);
+
+        save();
+        return true;
+    }
+
+
+    // Buscar nodo por código
+    private Node findNode(Node current, String code) {
+        if (current == null) return null;
+        if (current.getStation().getCode().equals(code)) return current;
+
+        for (Node child : current.getChildren()) {
+            Node result = findNode(child, code);
+            if (result != null) return result;
+        }
+        return null;
+    }
+
     // Guardar árbol en XML
     public void save(){
-        PersistenceManager.getInstance().getRouteDAO().guardar(this, FILE_PATH);
+        PersistenceManager.getInstance().getRouteDAO().save(this, FILE_PATH);
     }
 
     // --- Getters y setters ---

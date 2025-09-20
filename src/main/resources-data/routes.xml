@@ -2,7 +2,7 @@
 <routeTree>
     <root>
         <station>
-            <code>duitama1</code>
+            <code>duitama2</code>
             <location>Duitama</location>
         </station>
         <children>
@@ -52,22 +52,6 @@
                     </node>
                 </children>
             </node>
-            <node>
-                <station>
-                    <code>nobsa1</code>
-                    <location>Nobsa</location>
-                </station>
-                <children>
-                    <node>
-                        <station>
-                            <code>sogamoso2</code>
-                            <location>Sogamoso</location>
-                        </station>
-                        <children/>
-                    </node>
-                </children>
-            </node>
         </children>
     </root>
-    <persistence/>
 </routeTree>

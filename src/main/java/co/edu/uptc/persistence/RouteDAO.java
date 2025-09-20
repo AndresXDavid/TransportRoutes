@@ -5,7 +5,7 @@ import co.edu.uptc.controller.RouteTree;
 /**
  * Interfaz que define el contrato para la persistencia de objetos {@link RouteTree}.
  * 
- * <p>Permite guardar y cargar estructuras de rutas en diferentes medios de almacenamiento
+ * <p>Permite save y load estructuras de rutas en diferentes medios de almacenamiento
  * (archivos XML, CSV, bases de datos, etc.) según la implementación concreta.</p>
  * 
  * <p>El uso de esta interfaz facilita la aplicación del patrón DAO, garantizando
@@ -18,10 +18,10 @@ public interface RouteDAO {
     /**
      * Guarda un objeto {@link RouteTree} en un archivo o medio de almacenamiento.
      *
-     * @param tree     Árbol de rutas a guardar.
+     * @param tree     Árbol de rutas a save.
      * @param filePath Ruta del archivo donde se debe almacenar la información.
      */
-    void guardar(RouteTree tree, String filePath);
+    void save(RouteTree tree, String filePath);
 
     /**
      * Carga un objeto {@link RouteTree} desde un archivo o medio de almacenamiento.
@@ -29,5 +29,5 @@ public interface RouteDAO {
      * @param filePath Ruta del archivo desde donde se debe leer la información.
      * @return Objeto {@link RouteTree} cargado, o {@code null} si ocurre un error.
      */
-    RouteTree cargar(String filePath);
+    RouteTree load(String filePath);
 }

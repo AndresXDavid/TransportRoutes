@@ -82,10 +82,10 @@ public class RouteController {
     public void addRoute(String code, String location, String parentCode) {
         boolean inserted = logic.insert(new Station(code, RouteConverter.capitalizeWords(location)), parentCode);
         if (inserted) {
-            view.showMessage("Ruta agregada correctamente.");
+            view.showInfo("route.added.success");
             updateHierarchy(); // refrescar árbol
         } else {
-            view.showMessage("No se pudo agregar la ruta.");
+            view.showError("route.added.failure");
         }
     }
 
@@ -104,9 +104,30 @@ public class RouteController {
         if (shortestRoute != null) {
             view.showRoutes(shortestRoute);
         } else {
-            view.showMessage("No se encontró la estación: " 
-                + RouteConverter.capitalizeWords(from) 
-                + " o " + RouteConverter.capitalizeWords(to));
+            view.showError("error.station.notfound",  
+                RouteConverter.capitalizeWords(from),  RouteConverter.capitalizeWords(to));
+        }
+    }
+
+    // Acción: editar ruta
+    public void editStation(String code, String newLocation, String newCode) {
+        boolean edited = logic.editStation(code, RouteConverter.capitalizeWords(newLocation), newCode);
+        if (edited) {
+            view.showInfo("route.edit.success");
+            updateHierarchy(); // refrescar árbol
+        } else {
+            view.showError("route.edit.failure");
+        }
+    }
+
+    // Acción: eliminar ruta
+    public void deleteStation(String code) {
+        boolean deleted = logic.deleteStation(code.trim());
+        if (deleted) {
+            view.showInfo("route.deleted.success");
+            updateHierarchy(); // refrescar árbol
+        } else {
+            view.showError("route.deleted.failure");
         }
     }
 }
