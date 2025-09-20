@@ -1,4 +1,4 @@
-package co.edu.uptc.persistance;
+package co.edu.uptc.persistence;
 
 import java.io.File;
 
@@ -7,8 +7,8 @@ import jakarta.xml.bind.JAXBContext;
 import jakarta.xml.bind.Marshaller;
 import jakarta.xml.bind.Unmarshaller;
 
-public class RoutePersistance {
-    public static void guardar(RouteTree tree, String filePath) {
+public class RoutePersistence {
+    public void guardar(RouteTree tree, String filePath) {
         try {
             JAXBContext context = JAXBContext.newInstance(RouteTree.class);
             Marshaller marshaller = context.createMarshaller();
@@ -20,7 +20,7 @@ public class RoutePersistance {
         }
     }
 
-    public static RouteTree cargar(String filePath) {
+    public RouteTree cargar(String filePath) {
         try {
             JAXBContext context = JAXBContext.newInstance(RouteTree.class);
             Unmarshaller unmarshaller = context.createUnmarshaller();

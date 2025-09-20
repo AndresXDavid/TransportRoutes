@@ -17,7 +17,15 @@
                             <code>tunja1</code>
                             <location>Tunja</location>
                         </station>
-                        <children/>
+                        <children>
+                            <node>
+<station>
+    <code>bogota1</code>
+    <location>Bogota</location>
+</station>
+<children/>
+                            </node>
+                        </children>
                     </node>
                 </children>
             </node>
@@ -61,4 +69,5 @@
             </node>
         </children>
     </root>
+    <persistence/>
 </routeTree>
