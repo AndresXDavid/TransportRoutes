@@ -274,6 +274,9 @@ public class RouteViewFX extends Application {
         editButton.setText(bundle.getString("button.edit"));
         deleteButton.setText(bundle.getString("button.delete"));
         exitButton.setText(bundle.getString("button.exit"));
+
+        // Limpiar TextArea al cambiar idioma
+        output.clear();
     }
 
     // Mostrar jerarquía en el TreeView
@@ -306,19 +309,16 @@ public class RouteViewFX extends Application {
 
     // Mostrar ruta encontrada
     public void showRoutes(List<?> stations) {
+        if (stations == null || stations.isEmpty()) {
+            output.clear(); // Borrar si no hay ruta
+            return;
+        }
+
         StringJoiner joiner = new StringJoiner(" " + bundle.getString("route.arrow") + " ");
         for (Object station : stations) {
             joiner.add(station.toString());
         }
 
-        Alert alert = new Alert(Alert.AlertType.INFORMATION);
-        alert.setTitle(bundle.getString("dialog.info.title"));
-        alert.setHeaderText(bundle.getString("route.found"));
-        alert.setContentText(joiner.toString());
-        alert.showAndWait();
-    }
-
-    public static void main(String[] args) {
-        launch(args);
+        output.setText(joiner.toString());
     }
 }
