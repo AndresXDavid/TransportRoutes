@@ -1,1 +1,5 @@
+co\edu\uptc\controller\RouteTreeTest.class
 co\edu\uptc\controller\RouteTreePersistenceTest.class
+co\edu\uptc\persistence\XmlRouteDAOTest.class
+co\edu\uptc\utils\RouteConverterTest.class
+co\edu\uptc\controller\RouteTreeEdgeCasesTest.class

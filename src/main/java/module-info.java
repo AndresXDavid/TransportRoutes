@@ -5,7 +5,6 @@ module co.edu.uptc {
     requires jakarta.xml.bind;
     requires java.logging;
 
-    opens co.edu.uptc.i18n;
     opens co.edu.uptc to javafx.fxml;
     opens co.edu.uptc.controller to jakarta.xml.bind;
     opens co.edu.uptc.persistence to jakarta.xml.bind;

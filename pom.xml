@@ -10,12 +10,7 @@
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <!-- Compilar siempre con la versión del JDK actual -->
-        <maven.compiler.release>${maven.compiler.release.version}</maven.compiler.release>
-        <maven.compiler.source>${maven.compiler.release.version}</maven.compiler.source>
-        <maven.compiler.target>${maven.compiler.release.version}</maven.compiler.target>
-        <!-- Valor por defecto si no se pasa desde la consola -->
-        <maven.compiler.release.version>17</maven.compiler.release.version>
+        <maven.compiler.release>17</maven.compiler.release>
     </properties>
 
     <dependencies>
@@ -45,10 +40,10 @@
 
         <!-- JUnit 5 -->
         <dependency>
-        <groupId>org.junit.jupiter</groupId>
-        <artifactId>junit-jupiter-api</artifactId>
-        <version>5.10.2</version>
-        <scope>test</scope>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter-api</artifactId>
+            <version>5.10.2</version>
+            <scope>test</scope>
         </dependency>
         <dependency>
             <groupId>org.junit.jupiter</groupId>
@@ -56,6 +51,8 @@
             <version>5.10.2</version>
             <scope>test</scope>
         </dependency>
+
+        <!-- Mockito -->
         <dependency>
             <groupId>org.mockito</groupId>
             <artifactId>mockito-core</artifactId>
@@ -78,8 +75,7 @@
                 <artifactId>maven-compiler-plugin</artifactId>
                 <version>3.11.0</version>
                 <configuration>
-                    <!-- Usa la versión configurada dinámicamente -->
-                    <release>${maven.compiler.release.version}</release>
+                    <release>${maven.compiler.release}</release>
                 </configuration>
             </plugin>
 
@@ -90,9 +86,24 @@
                 <version>0.0.8</version>
                 <configuration>
                     <mainClass>co.edu.uptc.App</mainClass>
-                    <options>
-                        <option>--enable-native-access=javafx.graphics</option>
-                    </options>
+                </configuration>
+            </plugin>
+
+            <!-- Jar -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-jar-plugin</artifactId>
+                <version>3.4.1</version>
+                <configuration>
+                    <!-- Forzar la creación de un JAR estándar, no modular -->
+                    <forceCreation>true</forceCreation>
+                    <archive>
+                        <manifest>
+                            <addClasspath>true</addClasspath>
+                            <classpathPrefix>lib/</classpathPrefix>
+                            <mainClass>co.edu.uptc.App</mainClass>
+                        </manifest>
+                    </archive>
                 </configuration>
             </plugin>
 
@@ -103,18 +114,10 @@
                 <version>3.2.5</version>
                 <configuration>
                     <forkCount>0</forkCount>
-                    <useModulePath>true</useModulePath>
-                    <argLine>
-                        --patch-module co.edu.uptc="${project.build.directory}/test-classes"
-                        --add-reads co.edu.uptc=org.mockito.mockito.core
-                        --add-opens co.edu.uptc/co.edu.uptc.controller=org.junit.platform.commons
-                        --add-opens co.edu.uptc/co.edu.uptc.controller=org.mockito.mockito.core
-                        --add-opens co.edu.uptc/co.edu.uptc.controller=jakarta.xml.bind
-                        --add-opens co.edu.uptc/co.edu.uptc.model=jakarta.xml.bind
-                        --add-opens co.edu.uptc/co.edu.uptc.persistence=jakarta.xml.bind
-                    </argLine>
+                    <useSystemClassLoader>false</useSystemClassLoader>
+                    <useModulePath>false</useModulePath>
                 </configuration>
-            </plugin>
+                </plugin>
         </plugins>
     </build>
 </project>

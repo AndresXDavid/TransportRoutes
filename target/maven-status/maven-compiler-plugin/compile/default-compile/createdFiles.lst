@@ -1,5 +1,4 @@
 co\edu\uptc\persistence\PersistenceManager.class
-co\edu\uptc\viewController\RouteView.class
 co\edu\uptc\controller\RouteController.class
 co\edu\uptc\model\Station.class
 co\edu\uptc\App.class

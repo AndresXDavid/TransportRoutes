@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report-3.0.xsd" version="3.0" name="co.edu.uptc.controller.RouteTreePersistenceTest" time="0.004" tests="2" errors="0" skipped="0" failures="0">
+<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report-3.0.xsd" version="3.0" name="co.edu.uptc.utils.RouteConverterTest" time="0.003" tests="2" errors="0" skipped="0" failures="0">
   <properties>
     <property name="java.specification.version" value="25"/>
     <property name="sun.cpu.isalist" value="amd64"/>
@@ -66,6 +66,6 @@
     <property name="library.jansi.path" value="C:\Program Files\Java\apache-maven-3.9.11\lib\jansi-native"/>
     <property name="java.class.version" value="69.0"/>
   </properties>
-  <testcase name="constructor_loadsFromDao_whenDaoReturnsTree" classname="co.edu.uptc.controller.RouteTreePersistenceTest" time="0.001"/>
-  <testcase name="insert_triggersSaveOnDao" classname="co.edu.uptc.controller.RouteTreePersistenceTest" time="0.001"/>
+  <testcase name="testCapitalizeWords_basic" classname="co.edu.uptc.utils.RouteConverterTest" time="0.001"/>
+  <testcase name="testCapitalizeWords_nullOrEmpty" classname="co.edu.uptc.utils.RouteConverterTest" time="0.001"/>
 </testsuite>
