@@ -1,6 +1,8 @@
 package co.edu.uptc.persistence;
 
 import java.io.File;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import co.edu.uptc.controller.RouteTree;
 import jakarta.xml.bind.JAXBContext;
@@ -11,50 +13,55 @@ import jakarta.xml.bind.Unmarshaller;
  * Implementación de {@link RouteDAO} que utiliza JAXB para la
  * serialización y deserialización de objetos {@link RouteTree}
  * en formato XML.
- * 
- * <p>Permite save y load árboles de rutas desde archivos XML,
- * manteniendo una representación estructurada y legible de los datos.</p>
- * 
- * <p>Esta clase aplica el patrón DAO (Data Access Object), separando
- * la lógica de acceso a datos de la lógica de negocio.</p>
- * 
- * @author TuNombre
  */
 public class XmlRouteDAO implements RouteDAO {
 
-    /**
-     * {@inheritDoc}
-     * 
-     * <p>Convierte el {@link RouteTree} en XML y lo almacena en el archivo especificado.</p>
-     */
+    private static final Logger LOGGER = Logger.getLogger(XmlRouteDAO.class.getName());
+
     @Override
     public void save(RouteTree tree, String filePath) {
         try {
+            if (tree == null) {
+                throw new PersistenceException("RouteTree nulo al intentar guardar.");
+            }
             JAXBContext context = JAXBContext.newInstance(RouteTree.class);
             Marshaller marshaller = context.createMarshaller();
             marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
 
-            marshaller.marshal(tree, new File(filePath));
+            File out = new File(filePath);
+            // Asegurar directorio padre exista
+            File parent = out.getParentFile();
+            if (parent != null && !parent.exists()) {
+                parent.mkdirs();
+            }
+
+            marshaller.marshal(tree, out);
+        } catch (PersistenceException p) {
+            throw p;
         } catch (Exception e) {
-            e.printStackTrace();
+            LOGGER.log(Level.SEVERE, "Error guardando RouteTree en XML: " + e.getMessage(), e);
+            throw new PersistenceException("Error guardando RouteTree en XML: " + e.getMessage(), e);
         }
     }
 
-    /**
-     * {@inheritDoc}
-     * 
-     * <p>Lee el contenido de un archivo XML y lo convierte nuevamente
-     * en un objeto {@link RouteTree}.</p>
-     */
     @Override
     public RouteTree load(String filePath) {
         try {
+            File f = new File(filePath);
+            if (!f.exists()) {
+                // No consideramos esto una excepción crítica: retornamos null para indicar "no hay datos".
+                LOGGER.log(Level.INFO, "Archivo de persistencia no existe: " + filePath);
+                return null;
+            }
+
             JAXBContext context = JAXBContext.newInstance(RouteTree.class);
             Unmarshaller unmarshaller = context.createUnmarshaller();
-            return (RouteTree) unmarshaller.unmarshal(new File(filePath));
+            return (RouteTree) unmarshaller.unmarshal(f);
+        } catch (PersistenceException p) {
+            throw p;
         } catch (Exception e) {
-            e.printStackTrace();
-            return null;
+            LOGGER.log(Level.SEVERE, "Error cargando RouteTree desde XML: " + e.getMessage(), e);
+            throw new PersistenceException("Error cargando RouteTree desde XML: " + e.getMessage(), e);
         }
     }
 }

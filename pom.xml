@@ -42,6 +42,32 @@
             <artifactId>jaxb-runtime</artifactId>
             <version>4.0.2</version>
         </dependency>
+
+        <!-- JUnit 5 -->
+        <dependency>
+        <groupId>org.junit.jupiter</groupId>
+        <artifactId>junit-jupiter-api</artifactId>
+        <version>5.10.2</version>
+        <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter-engine</artifactId>
+            <version>5.10.2</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.mockito</groupId>
+            <artifactId>mockito-core</artifactId>
+            <version>5.11.0</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.mockito</groupId>
+            <artifactId>mockito-junit-jupiter</artifactId>
+            <version>5.11.0</version>
+            <scope>test</scope>
+        </dependency>
     </dependencies>
 
     <build>
@@ -67,6 +93,26 @@
                     <options>
                         <option>--enable-native-access=javafx.graphics</option>
                     </options>
+                </configuration>
+            </plugin>
+
+            <!-- Surefire para JUnit 5 -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <version>3.2.5</version>
+                <configuration>
+                    <forkCount>0</forkCount>
+                    <useModulePath>true</useModulePath>
+                    <argLine>
+                        --patch-module co.edu.uptc="${project.build.directory}/test-classes"
+                        --add-reads co.edu.uptc=org.mockito.mockito.core
+                        --add-opens co.edu.uptc/co.edu.uptc.controller=org.junit.platform.commons
+                        --add-opens co.edu.uptc/co.edu.uptc.controller=org.mockito.mockito.core
+                        --add-opens co.edu.uptc/co.edu.uptc.controller=jakarta.xml.bind
+                        --add-opens co.edu.uptc/co.edu.uptc.model=jakarta.xml.bind
+                        --add-opens co.edu.uptc/co.edu.uptc.persistence=jakarta.xml.bind
+                    </argLine>
                 </configuration>
             </plugin>
         </plugins>
