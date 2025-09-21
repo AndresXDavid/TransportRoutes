@@ -124,8 +124,9 @@ public class RouteViewFX extends Application {
             dialog.setTitle(bundle.getString("dialog.search.header"));
 
             // Botones OK / Cancel
-            ButtonType searchButtonType = new ButtonType("Buscar", ButtonBar.ButtonData.OK_DONE);
-            dialog.getDialogPane().getButtonTypes().addAll(searchButtonType, ButtonType.CANCEL);
+            ButtonType searchButtonType = new ButtonType(bundle.getString("dialog.button.search"), ButtonBar.ButtonData.OK_DONE);
+            ButtonType cancelButtonType = new ButtonType(bundle.getString("dialog.button.cancel"), ButtonBar.ButtonData.CANCEL_CLOSE);
+            dialog.getDialogPane().getButtonTypes().addAll(searchButtonType, cancelButtonType);
 
             // Contenido: dos campos
             GridPane grid = new GridPane();

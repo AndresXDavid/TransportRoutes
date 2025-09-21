@@ -48,6 +48,12 @@
 </station>
 <children/>
                             </node>
+                            <node>
+<station>
+    <code>zipaquira1</code>
+    <location>Zipaquirá</location>
+</station>
+                            </node>
                         </children>
                     </node>
                 </children>
