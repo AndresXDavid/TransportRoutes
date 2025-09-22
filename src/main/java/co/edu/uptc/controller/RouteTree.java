@@ -25,7 +25,7 @@ import java.util.*;
 @XmlAccessorType(XmlAccessType.FIELD)
 public class RouteTree {
 
-    private static final String FILE_PATH = "src/main/resources-data/routes.xml";
+    private static final String FILE_PATH = "src/main/resources/co/edu/uptc/routes.xml";
 
     @XmlElement(name = "root")
     private Node root;
@@ -44,7 +44,8 @@ public class RouteTree {
     }
 
     public Node getRoot() { return root; }
-    public void setRoot(Node root) { this.root = root; }
+    public void setRoot(Node root) {this.root = Objects.requireNonNull(root, "El nodo raiz no puede ser null"); }
+
 
     /**
      * Inserta una nueva estación como hijo del nodo cuyo código es parentCode.
@@ -53,10 +54,12 @@ public class RouteTree {
      * @return true si insertó, false si ya existe o no se encontró padre.
      */
     public boolean insert(Station newStation, String parentCode) {
-        if (newStation == null) return false;
-        String id = newStation.getCode() != null ? newStation.getCode() : newStation.getLocation();
-        String name = newStation.getLocation();
-        if (id == null) return false;
+        Objects.requireNonNull(newStation, "La estacin no puede ser null");
+        Objects.requireNonNull(newStation.getCode(), "El codigo de la estacin no puede ser null");
+        Objects.requireNonNull(newStation.getLocation(), "La ubicacion de la estacion no puede ser null");
+
+        String id = newStation.getCode().trim();
+        String name = newStation.getLocation().trim();
 
         if (root == null) {
             if (parentCode == null) {
@@ -68,12 +71,11 @@ public class RouteTree {
             }
         }
 
-        if (existsRec(root, id)) return false;
-        if (existsLocation(root, name)) return false;
+        if (existsRec(root, id) || existsLocation(root, name)) return false;
+
         boolean inserted = insertRec(root, newStation, parentCode);
         if (inserted) {
             save();
-            return true;
         }
         return inserted;
     }
@@ -93,17 +95,17 @@ public class RouteTree {
     }
 
     public boolean deleteStation(String code) {
-        if (code == null || root == null) return false;
+        Objects.requireNonNull(code, "El codigo no puede ser null");
+
+        if (root == null) return false;
+
         if (root.getStation() != null && code.equals(root.getStation().getCode())) {
             root = null;
             save();
             return true;
         }
         boolean removed = removeRec(root, code);
-        if (removed) {
-            save();
-            return true;
-        }
+        if (removed) save();
         return removed;
     }
 
@@ -122,13 +124,19 @@ public class RouteTree {
     }
 
     public boolean editStation(String code, String newLocation, String newCode) {
-        if (code == null) return false;
+        Objects.requireNonNull(code, "El codigo no puede ser null");
+        Objects.requireNonNull(newLocation, "La nueva ubicacion no puede ser null");
+        Objects.requireNonNull(newCode, "El nuevo codigo no puede ser null");
+
         Node node = findNode(root, code);
-        if (node == null) return false;
-        if (newCode != null && !newCode.equals(code) && existsRec(root, newCode) && existsLocation(root, newLocation)) return false;
-        if (node.getStation() == null) return false;
-        node.getStation().setLocation(newLocation);
-        node.getStation().setCode(newCode);
+        if (node == null || node.getStation() == null) return false;
+
+        if (newCode != null && !newCode.equals(code) && existsRec(root, newCode)) return false;
+        if (existsLocation(root, newLocation)) return false;
+
+        node.getStation().setLocation(newLocation.trim());
+        node.getStation().setCode(newCode != null ? newCode.trim() : code);
+
         save();
         return true;
     }
@@ -159,29 +167,61 @@ public class RouteTree {
      * @return lista de Station desde inicio hasta fin (inclusive) o null si alguna no existe
      */
     public List<Station> searchShortRoute(String startLocation, String endLocation) {
-        if (startLocation == null || endLocation == null || root == null) return null;
-        List<Node> p1 = searchRec(root, startLocation);
-        List<Node> p2 = searchRec(root, endLocation);
-        if (p1 == null || p2 == null) return null;
+    Objects.requireNonNull(startLocation, "El origen no puede ser null");
+    Objects.requireNonNull(endLocation, "El destino no puede ser null");
 
-        int i = 0;
-        int max = Math.min(p1.size(), p2.size());
-        while (i < max) {
-            Station s1 = p1.get(i).getStation();
-            Station s2 = p2.get(i).getStation();
-            if (s1 == null || s2 == null) break;
-            if (!Objects.equals(s1.getCode(), s2.getCode())) break;
-            i++;
+    if (root == null) return null;
+
+    List<Node> p1 = searchRec(root, startLocation.trim());
+    List<Node> p2 = searchRec(root, endLocation.trim());
+    if (p1 == null || p2 == null) return null;
+
+    // encontrar último índice común (LCA index)
+    int max = Math.min(p1.size(), p2.size());
+    int lastCommonIndex = -1;
+    for (int idx = 0; idx < max; idx++) {
+        Node n1 = p1.get(idx);
+        Node n2 = p2.get(idx);
+        if (n1 == null || n2 == null) break;
+        Station s1 = n1.getStation();
+        Station s2 = n2.getStation();
+        if (s1 == null || s2 == null) break;
+
+        // comparar de forma consistente: primero code si existe, si no location
+        String code1 = s1.getCode();
+        String code2 = s2.getCode();
+        boolean same;
+        if (code1 != null || code2 != null) {
+            same = Objects.equals(code1, code2);
+        } else {
+            same = Objects.equals(s1.getLocation(), s2.getLocation());
         }
-        i--;
-        if (i < 0) return null;
 
-        List<Station> route = new ArrayList<>();
-        for (int j = p1.size() - 1; j > i; j--) route.add(p1.get(j).getStation());
-        route.add(p1.get(i).getStation());
-        for (int j = i + 1; j < p2.size(); j++) route.add(p2.get(j).getStation());
-        return route;
+        if (!same) break;
+        lastCommonIndex = idx;
     }
+
+    if (lastCommonIndex < 0) return null; // no comparten ancestro común (o no se puede identificar)
+
+    // construir la ruta desde start hasta end pasando por el LCA
+    List<Station> route = new ArrayList<>();
+
+    // Desde el nodo 'start' ascendiendo hasta el hijo directo del LCA
+    for (int j = p1.size() - 1; j > lastCommonIndex; j--) {
+        route.add(p1.get(j).getStation());
+    }
+
+    // Añadir LCA
+    route.add(p1.get(lastCommonIndex).getStation());
+
+    // Desde el hijo directo del LCA hacia el nodo 'end'
+    for (int j = lastCommonIndex + 1; j < p2.size(); j++) {
+        route.add(p2.get(j).getStation());
+    }
+
+    return route;
+}
+
 
     /**
      * Por implementar dentro de RouteTree.
@@ -190,42 +230,50 @@ public class RouteTree {
      * Esta función es la que garantiza la ruta con menor número de aristas en grafos no dirigidos.
      */
     public List<Station> searchShortestPathBFS(String fromLocation, String toLocation) {
-        if (fromLocation == null || toLocation == null || root == null) return null;
-        // Construir mapa location -> Node para acceso rápido
-        Map<String, Node> locMap = new HashMap<>();
-        buildLocationMap(root, locMap);
+        Objects.requireNonNull(fromLocation, "El origen no puede ser null");
+        Objects.requireNonNull(toLocation, "El destino no puede ser null");
 
-        Node start = locMap.get(fromLocation);
-        Node goal = locMap.get(toLocation);
-        if (start == null || goal == null) return null;
+        if (root == null) return null;
 
-        // BFS con path reconstruction
+        // Construir mapa: location -> Node
+        Map<String, Node> locationMap = new HashMap<>();
+        buildLocationMap(root, locationMap);
+
+        Node start = locationMap.get(fromLocation.trim());
+        Node goal = locationMap.get(toLocation.trim());
+        if (start == null || goal == null) return null; 
+
+        // BFS Clasico
         Queue<Node> q = new ArrayDeque<>();
-        Map<Node, Node> parent = new HashMap<>(); // child -> parent
+        Map<Node, Node> parent = new HashMap<>();
         q.add(start);
         parent.put(start, null);
-        boolean found = false;
-        while (!q.isEmpty() && !found) {
+
+        while (!q.isEmpty()) {
             Node cur = q.poll();
-            // neighbors: children + parent (if exists)
+            if (cur.equals(goal)) break;
+
+            // Vecinos: padre + hijos
             List<Node> neighbors = new ArrayList<>(cur.getChildren());
             if (cur.getParent() != null) neighbors.add(cur.getParent());
+
             for (Node nb : neighbors) {
                 if (!parent.containsKey(nb)) {
                     parent.put(nb, cur);
-                    if (nb.equals(goal)) { found = true; break; }
                     q.add(nb);
                 }
             }
         }
+
+        // Si no hay ruta
         if (!parent.containsKey(goal)) return null;
 
-        // Reconstruir ruta desde goal a start con parent map
+        // Reconstruir ruta desde el destino hasta el origen
         LinkedList<Station> route = new LinkedList<>();
         Node cur = goal;
         while (cur != null) {
             if (cur.getStation() != null) route.addFirst(cur.getStation());
-            cur = parent.get(cur);
+            cur = parent.get(cur); 
         }
         return route;
     }

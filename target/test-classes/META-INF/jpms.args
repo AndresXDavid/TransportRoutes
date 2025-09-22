@@ -1,4 +1,0 @@
---patch-module
-co.edu.uptc=_
---add-reads
-co.edu.uptc=ALL-UNNAMED

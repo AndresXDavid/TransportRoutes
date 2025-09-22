@@ -64,12 +64,6 @@
                             </node>
                         </children>
                     </node>
-                    <node>
-                        <station>
-                            <code>Terminal Nobsa</code>
-                            <location>Nobsa</location>
-                        </station>
-                    </node>
                 </children>
             </node>
         </children>
