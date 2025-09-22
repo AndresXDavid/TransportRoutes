@@ -62,6 +62,7 @@ public class RouteTree {
     public boolean insert(Station newStation, String parentCode) {
         if (newStation == null) return false;
         String id = newStation.getCode() != null ? newStation.getCode() : newStation.getLocation();
+        String name = newStation.getLocation();
         if (id == null) return false;
 
         if (root == null) {
@@ -75,6 +76,7 @@ public class RouteTree {
         }
 
         if (existsRec(root, id)) return false;
+        if (existsLocation(root, name)) return false;
         boolean inserted = insertRec(root, newStation, parentCode);
         if (inserted) {
             save(); // Propagar la excepción si algo falla
@@ -130,7 +132,7 @@ public class RouteTree {
         if (code == null) return false;
         Node node = findNode(root, code);
         if (node == null) return false;
-        if (newCode != null && !newCode.equals(code) && existsRec(root, newCode)) return false;
+        if (newCode != null && !newCode.equals(code) && existsRec(root, newCode) && existsLocation(root, newLocation)) return false;
         if (node.getStation() == null) return false;
         node.getStation().setLocation(newLocation);
         node.getStation().setCode(newCode);
@@ -262,6 +264,13 @@ public class RouteTree {
         if (current == null || code == null) return false;
         if (current.getStation() != null && code.equals(current.getStation().getCode())) return true;
         for (Node child : current.getChildren()) if (existsRec(child, code)) return true;
+        return false;
+    }
+
+    private boolean existsLocation(Node current, String name) {
+        if (current == null || name == null) return false;
+        if (current.getStation() != null && name.equals(current.getStation().getLocation())) return true;
+        for (Node child : current.getChildren()) if (existsLocation(child, name)) return true;
         return false;
     }
 

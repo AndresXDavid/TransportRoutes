@@ -2,25 +2,25 @@
 <routeTree>
     <root>
         <station>
-            <code>duitama2</code>
+            <code>Terminal Duitama</code>
             <location>Duitama</location>
         </station>
         <children>
             <node>
                 <station>
-                    <code>paipa1</code>
+                    <code>Terminal Paipa</code>
                     <location>Paipa</location>
                 </station>
                 <children>
                     <node>
                         <station>
-                            <code>tunja1</code>
+                            <code>Terminal Tunja</code>
                             <location>Tunja</location>
                         </station>
                         <children>
                             <node>
 <station>
-    <code>bogota1</code>
+    <code>Terminal Bogota</code>
     <location>Bogota</location>
 </station>
 <children/>
@@ -31,30 +31,44 @@
             </node>
             <node>
                 <station>
-                    <code>tibasosa1</code>
+                    <code>Terminal Tibasosa</code>
                     <location>Tibasosa</location>
                 </station>
                 <children>
                     <node>
                         <station>
-                            <code>sogamoso1</code>
+                            <code>Terminal Sogamoso</code>
                             <location>Sogamoso</location>
                         </station>
                         <children>
                             <node>
 <station>
-    <code>yopal1</code>
+    <code>Terminal Yopal</code>
     <location>Yopal</location>
 </station>
 <children/>
                             </node>
                             <node>
 <station>
-    <code>zipaquira1</code>
-    <location>Zipaquirá</location>
+    <code>Terminal Zipaquira</code>
+    <location>Zipaquira</location>
 </station>
+<children/>
+                            </node>
+                            <node>
+<station>
+    <code>Terminal Firavitoba</code>
+    <location>Firavitoba</location>
+</station>
+<children/>
                             </node>
                         </children>
+                    </node>
+                    <node>
+                        <station>
+                            <code>Terminal Nobsa</code>
+                            <location>Nobsa</location>
+                        </station>
                     </node>
                 </children>
             </node>
