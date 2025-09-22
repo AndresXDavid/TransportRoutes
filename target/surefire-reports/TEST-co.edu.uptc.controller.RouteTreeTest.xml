@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report-3.0.xsd" version="3.0" name="co.edu.uptc.controller.RouteTreeTest" time="0.549" tests="6" errors="0" skipped="0" failures="0">
+<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report-3.0.xsd" version="3.0" name="co.edu.uptc.controller.RouteTreeTest" time="0.021" tests="6" errors="0" skipped="0" failures="0">
   <properties>
-    <property name="java.specification.version" value="25"/>
+    <property name="java.specification.version" value="24"/>
     <property name="sun.cpu.isalist" value="amd64"/>
     <property name="sun.jnu.encoding" value="Cp1252"/>
     <property name="java.class.path" value="C:\Program Files\Java\apache-maven-3.9.11\boot\plexus-classworlds-2.9.0.jar"/>
@@ -10,33 +10,32 @@
     <property name="user.variant" value=""/>
     <property name="java.vendor.url" value="https://java.oracle.com/"/>
     <property name="user.timezone" value="America/Bogota"/>
-    <property name="user.country.format" value="CO"/>
     <property name="maven.conf" value="C:\Program Files\Java\apache-maven-3.9.11/conf"/>
-    <property name="java.vm.specification.version" value="25"/>
+    <property name="java.vm.specification.version" value="24"/>
     <property name="os.name" value="Windows 11"/>
     <property name="sun.java.launcher" value="SUN_STANDARD"/>
     <property name="user.country" value="US"/>
-    <property name="sun.boot.library.path" value="C:\Program Files\Java\jdk-25\bin"/>
-    <property name="sun.java.command" value="org.codehaus.plexus.classworlds.launcher.Launcher test"/>
+    <property name="sun.boot.library.path" value="C:\Program Files\Java\jdk-24\bin"/>
+    <property name="sun.java.command" value="org.codehaus.plexus.classworlds.launcher.Launcher install -f c:\Users\FerSAR\Documents\Docs Uptc\PrograIII\transportroutes\pom.xml"/>
     <property name="jdk.debug" value="release"/>
     <property name="maven.home" value="C:\Program Files\Java\apache-maven-3.9.11"/>
-    <property name="surefire.test.class.path" value="F:\University\6. Segundo Semestre de 2025 (Septimo Semestre)\Programación III\Tests &amp; Projects\Projects\First Fifty\Proyecto\TransportRoutes\target\test-classes;F:\University\6. Segundo Semestre de 2025 (Septimo Semestre)\Programación III\Tests &amp; Projects\Projects\First Fifty\Proyecto\TransportRoutes\target\classes;C:\Users\Andoryu\.m2\repository\org\openjfx\javafx-controls\23\javafx-controls-23.jar;C:\Users\Andoryu\.m2\repository\org\openjfx\javafx-controls\23\javafx-controls-23-win.jar;C:\Users\Andoryu\.m2\repository\org\openjfx\javafx-graphics\23\javafx-graphics-23.jar;C:\Users\Andoryu\.m2\repository\org\openjfx\javafx-graphics\23\javafx-graphics-23-win.jar;C:\Users\Andoryu\.m2\repository\org\openjfx\javafx-base\23\javafx-base-23.jar;C:\Users\Andoryu\.m2\repository\org\openjfx\javafx-base\23\javafx-base-23-win.jar;C:\Users\Andoryu\.m2\repository\org\openjfx\javafx-fxml\23\javafx-fxml-23.jar;C:\Users\Andoryu\.m2\repository\org\openjfx\javafx-fxml\23\javafx-fxml-23-win.jar;C:\Users\Andoryu\.m2\repository\jakarta\xml\bind\jakarta.xml.bind-api\4.0.2\jakarta.xml.bind-api-4.0.2.jar;C:\Users\Andoryu\.m2\repository\jakarta\activation\jakarta.activation-api\2.1.3\jakarta.activation-api-2.1.3.jar;C:\Users\Andoryu\.m2\repository\org\glassfish\jaxb\jaxb-runtime\4.0.2\jaxb-runtime-4.0.2.jar;C:\Users\Andoryu\.m2\repository\org\glassfish\jaxb\jaxb-core\4.0.2\jaxb-core-4.0.2.jar;C:\Users\Andoryu\.m2\repository\org\eclipse\angus\angus-activation\2.0.0\angus-activation-2.0.0.jar;C:\Users\Andoryu\.m2\repository\org\glassfish\jaxb\txw2\4.0.2\txw2-4.0.2.jar;C:\Users\Andoryu\.m2\repository\com\sun\istack\istack-commons-runtime\4.1.1\istack-commons-runtime-4.1.1.jar;C:\Users\Andoryu\.m2\repository\org\junit\jupiter\junit-jupiter-api\5.10.2\junit-jupiter-api-5.10.2.jar;C:\Users\Andoryu\.m2\repository\org\opentest4j\opentest4j\1.3.0\opentest4j-1.3.0.jar;C:\Users\Andoryu\.m2\repository\org\junit\platform\junit-platform-commons\1.10.2\junit-platform-commons-1.10.2.jar;C:\Users\Andoryu\.m2\repository\org\apiguardian\apiguardian-api\1.1.2\apiguardian-api-1.1.2.jar;C:\Users\Andoryu\.m2\repository\org\junit\jupiter\junit-jupiter-engine\5.10.2\junit-jupiter-engine-5.10.2.jar;C:\Users\Andoryu\.m2\repository\org\junit\platform\junit-platform-engine\1.10.2\junit-platform-engine-1.10.2.jar;C:\Users\Andoryu\.m2\repository\org\mockito\mockito-core\5.11.0\mockito-core-5.11.0.jar;C:\Users\Andoryu\.m2\repository\net\bytebuddy\byte-buddy\1.14.12\byte-buddy-1.14.12.jar;C:\Users\Andoryu\.m2\repository\net\bytebuddy\byte-buddy-agent\1.14.12\byte-buddy-agent-1.14.12.jar;C:\Users\Andoryu\.m2\repository\org\objenesis\objenesis\3.3\objenesis-3.3.jar;C:\Users\Andoryu\.m2\repository\org\mockito\mockito-junit-jupiter\5.11.0\mockito-junit-jupiter-5.11.0.jar;"/>
+    <property name="surefire.test.class.path" value="c:\Users\FerSAR\Documents\Docs Uptc\PrograIII\transportroutes\target\test-classes;c:\Users\FerSAR\Documents\Docs Uptc\PrograIII\transportroutes\target\classes;C:\Users\FerSAR\.m2\repository\org\openjfx\javafx-controls\23\javafx-controls-23.jar;C:\Users\FerSAR\.m2\repository\org\openjfx\javafx-controls\23\javafx-controls-23-win.jar;C:\Users\FerSAR\.m2\repository\org\openjfx\javafx-graphics\23\javafx-graphics-23.jar;C:\Users\FerSAR\.m2\repository\org\openjfx\javafx-graphics\23\javafx-graphics-23-win.jar;C:\Users\FerSAR\.m2\repository\org\openjfx\javafx-base\23\javafx-base-23.jar;C:\Users\FerSAR\.m2\repository\org\openjfx\javafx-base\23\javafx-base-23-win.jar;C:\Users\FerSAR\.m2\repository\org\openjfx\javafx-fxml\23\javafx-fxml-23.jar;C:\Users\FerSAR\.m2\repository\org\openjfx\javafx-fxml\23\javafx-fxml-23-win.jar;C:\Users\FerSAR\.m2\repository\jakarta\xml\bind\jakarta.xml.bind-api\4.0.2\jakarta.xml.bind-api-4.0.2.jar;C:\Users\FerSAR\.m2\repository\jakarta\activation\jakarta.activation-api\2.1.3\jakarta.activation-api-2.1.3.jar;C:\Users\FerSAR\.m2\repository\org\glassfish\jaxb\jaxb-runtime\4.0.2\jaxb-runtime-4.0.2.jar;C:\Users\FerSAR\.m2\repository\org\glassfish\jaxb\jaxb-core\4.0.2\jaxb-core-4.0.2.jar;C:\Users\FerSAR\.m2\repository\org\eclipse\angus\angus-activation\2.0.0\angus-activation-2.0.0.jar;C:\Users\FerSAR\.m2\repository\org\glassfish\jaxb\txw2\4.0.2\txw2-4.0.2.jar;C:\Users\FerSAR\.m2\repository\com\sun\istack\istack-commons-runtime\4.1.1\istack-commons-runtime-4.1.1.jar;C:\Users\FerSAR\.m2\repository\org\junit\jupiter\junit-jupiter-api\5.10.2\junit-jupiter-api-5.10.2.jar;C:\Users\FerSAR\.m2\repository\org\opentest4j\opentest4j\1.3.0\opentest4j-1.3.0.jar;C:\Users\FerSAR\.m2\repository\org\junit\platform\junit-platform-commons\1.10.2\junit-platform-commons-1.10.2.jar;C:\Users\FerSAR\.m2\repository\org\apiguardian\apiguardian-api\1.1.2\apiguardian-api-1.1.2.jar;C:\Users\FerSAR\.m2\repository\org\junit\jupiter\junit-jupiter-engine\5.10.2\junit-jupiter-engine-5.10.2.jar;C:\Users\FerSAR\.m2\repository\org\junit\platform\junit-platform-engine\1.10.2\junit-platform-engine-1.10.2.jar;C:\Users\FerSAR\.m2\repository\org\mockito\mockito-core\5.11.0\mockito-core-5.11.0.jar;C:\Users\FerSAR\.m2\repository\net\bytebuddy\byte-buddy\1.14.12\byte-buddy-1.14.12.jar;C:\Users\FerSAR\.m2\repository\net\bytebuddy\byte-buddy-agent\1.14.12\byte-buddy-agent-1.14.12.jar;C:\Users\FerSAR\.m2\repository\org\objenesis\objenesis\3.3\objenesis-3.3.jar;C:\Users\FerSAR\.m2\repository\org\mockito\mockito-junit-jupiter\5.11.0\mockito-junit-jupiter-5.11.0.jar;"/>
     <property name="sun.cpu.endian" value="little"/>
-    <property name="user.home" value="C:\Users\Andoryu"/>
+    <property name="user.home" value="C:\Users\FerSAR"/>
     <property name="user.language" value="en"/>
     <property name="java.specification.vendor" value="Oracle Corporation"/>
-    <property name="java.version.date" value="2025-09-16"/>
-    <property name="java.home" value="C:\Program Files\Java\jdk-25"/>
+    <property name="java.version.date" value="2025-07-15"/>
+    <property name="java.home" value="C:\Program Files\Java\jdk-24"/>
     <property name="file.separator" value="\"/>
-    <property name="basedir" value="F:\University\6. Segundo Semestre de 2025 (Septimo Semestre)\Programación III\Tests &amp; Projects\Projects\First Fifty\Proyecto\TransportRoutes"/>
+    <property name="basedir" value="c:\Users\FerSAR\Documents\Docs Uptc\PrograIII\transportroutes"/>
     <property name="java.vm.compressedOopsMode" value="Zero based"/>
     <property name="line.separator" value="&#10;"/>
     <property name="java.vm.specification.vendor" value="Oracle Corporation"/>
     <property name="java.specification.name" value="Java Platform API Specification"/>
     <property name="user.script" value=""/>
     <property name="sun.management.compiler" value="HotSpot 64-Bit Tiered Compilers"/>
-    <property name="java.runtime.version" value="25+37-LTS-3491"/>
-    <property name="user.name" value="Andoryu"/>
+    <property name="java.runtime.version" value="24.0.2+12-54"/>
+    <property name="user.name" value="FerSAR"/>
     <property name="stdout.encoding" value="cp437"/>
     <property name="path.separator" value=";"/>
     <property name="os.version" value="10.0"/>
@@ -44,38 +43,30 @@
     <property name="file.encoding" value="UTF-8"/>
     <property name="guice.disable.misplaced.annotation.check" value="true"/>
     <property name="java.vm.name" value="Java HotSpot(TM) 64-Bit Server VM"/>
-    <property name="localRepository" value="C:\Users\Andoryu\.m2\repository"/>
+    <property name="localRepository" value="C:\Users\FerSAR\.m2\repository"/>
     <property name="java.vendor.url.bug" value="https://bugreport.java.com/bugreport/"/>
-    <property name="java.io.tmpdir" value="C:\Users\Andoryu\AppData\Local\Temp\"/>
-    <property name="java.version" value="25"/>
-    <property name="user.dir" value="F:\University\6. Segundo Semestre de 2025 (Septimo Semestre)\Programación III\Tests &amp; Projects\Projects\First Fifty\Proyecto\TransportRoutes"/>
+    <property name="java.io.tmpdir" value="C:\Users\FerSAR\AppData\Local\Temp\"/>
+    <property name="java.version" value="24.0.2"/>
+    <property name="user.dir" value="c:\Users\FerSAR\Documents\Docs Uptc\PrograIII\transportroutes"/>
     <property name="os.arch" value="amd64"/>
-    <property name="maven.multiModuleProjectDirectory" value="F:\University\6. Segundo Semestre de 2025 (Septimo Semestre)\Programación III\Tests &amp; Projects\Projects\First Fifty\Proyecto\TransportRoutes"/>
+    <property name="maven.multiModuleProjectDirectory" value="C:\Users\FerSAR\Documents\Docs Uptc\PrograIII\transportroutes"/>
     <property name="java.vm.specification.name" value="Java Virtual Machine Specification"/>
-    <property name="user.language.format" value="es"/>
     <property name="sun.os.patch.level" value=""/>
     <property name="native.encoding" value="Cp1252"/>
-    <property name="java.library.path" value="C:\Program Files\Java\jdk-25\bin;C:\WINDOWS\Sun\Java\bin;C:\WINDOWS\system32;C:\WINDOWS;C:\Users\Andoryu\bin;C:\Program Files\Git\mingw64\bin;C:\Program Files\Git\usr\local\bin;C:\Program Files\Git\usr\bin;C:\Program Files\Git\usr\bin;C:\Program Files\Git\mingw64\bin;C:\Program Files\Git\usr\bin;C:\Users\Andoryu\bin;C:\Program Files\Java\jdk-25\bin;C:\Program Files\Java\javafx-sdk-25\bin;C:\Program Files\Java\apache-maven-3.9.11\bin;C:\Program Files\Java\jdk-25\bin;C:\Python313\Scripts;C:\Python313;C:\Program Files\Common Files\Oracle\Java\javapath;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\WINDOWS\System32\WindowsPowerShell\v1.0;C:\WINDOWS\System32\OpenSSH;C:\Program Files\dotnet;C:\Program Files\NVIDIA Corporation\NVIDIA app\NvDLISR;C:\Program Files (x86)\NVIDIA Corporation\PhysX\Common;C:\Program Files (x86)\dotnet;C:\composer;C:\Program Files\Git\cmd;C:\mingw64\bin;C:\Program Files\nodejs;C:\ProgramData\chocolatey\bin;C:\Program Files\Java\jdk-25\bin;C:\Program Files\Java\javafx-sdk-25\bin;C:\Program Files\Java\apache-maven-3.9.11\bin;C:\Program Files\Java\jdk-25\bin;C:\Users\Andoryu\AppData\Local\Programs\Microsoft VS Code\bin;C:\Users\Andoryu\AppData\Local\Microsoft\WindowsApps;C:\Program Files\JetBrains\IntelliJ IDEA 2024.3.2.2\bin;C:\Program Files\JetBrains\Aqua 2024.3.2\bin;C:\Program Files\JetBrains\WebStorm 2024.3.2.1\bin;C:\Program Files\JetBrains\PyCharm 2024.3.3\bin;C:\Program Files\JetBrains\PhpStorm 2024.3.3\bin;C:\Program Files\JetBrains\CLion 2024.3.3\bin;C:\laragon\bin\php\php-8.3.7-Win32-vs16-x64;C:\Users\Andoryu\AppData\Roaming\Composer\vendor\bin;C:\Users\Andoryu\AppData\Local\GitHubDesktop\bin;C:\mingw64\bin;C:\Users\Andoryu\AppData\Roaming\npm;C:\Program Files\Git\usr\bin\vendor_perl;C:\Program Files\Git\usr\bin\core_perl;c:\Users\Andoryu\AppData\Roaming\Code\User\globalStorage\github.copilot-chat\debugCommand;."/>
+    <property name="java.library.path" value="C:\Program Files\Java\jdk-24\bin;C:\windows\Sun\Java\bin;C:\windows\system32;C:\windows;C:\Program Files\Common Files\Oracle\Java\javapath;C:\Program Files (x86)\Common Files\Oracle\Java\java8path;C:\Program Files (x86)\Common Files\Oracle\Java\javapath;C:\windows\system32;C:\windows;C:\windows\System32\Wbem;C:\windows\System32\WindowsPowerShell\v1.0\;C:\windows\System32\OpenSSH\;C:\Program Files (x86)\NVIDIA Corporation\PhysX\Common;C:\Program Files\NVIDIA Corporation\NVIDIA NvDLISR;C:\Users\Administrator\AppData\Local\Microsoft\WindowsApps;C:\Program Files\HP\OMEN-Broadcast\Common;C:\Program Files\Git\cmd;C:\Users\FerSAR\AppData\Local\Microsoft\WindowsApps;C:\Users\FerSAR\AppData\Local\Programs\Microsoft VS Code\bin;C:\Program Files\Java\jdk-24\bin;C:\Program Files\Java\jre1.8.0_461\bin;C:\Program Files\Java\apache-maven-3.9.11\bin;C:\Program Files\Java\javafx-sdk-24.0.2\bin;;c:\Users\FerSAR\AppData\Roaming\Code\User\globalStorage\github.copilot-chat\debugCommand;."/>
     <property name="java.vm.info" value="mixed mode, sharing"/>
     <property name="stderr.encoding" value="cp437"/>
     <property name="java.vendor" value="Oracle Corporation"/>
-    <property name="java.vm.version" value="25+37-LTS-3491"/>
-    <property name="stdin.encoding" value="cp437"/>
+    <property name="java.vm.version" value="24.0.2+12-54"/>
     <property name="classworlds.conf" value="C:\Program Files\Java\apache-maven-3.9.11\bin\m2.conf"/>
     <property name="sun.io.unicode.encoding" value="UnicodeLittle"/>
     <property name="library.jansi.path" value="C:\Program Files\Java\apache-maven-3.9.11\lib\jansi-native"/>
-    <property name="java.class.version" value="69.0"/>
+    <property name="java.class.version" value="68.0"/>
   </properties>
-  <testcase name="testSearchShortRouteAncestro" classname="co.edu.uptc.controller.RouteTreeTest" time="0.521">
-    <system-err><![CDATA[WARNING: A Java agent has been loaded dynamically (C:\Users\Andoryu\.m2\repository\net\bytebuddy\byte-buddy-agent\1.14.12\byte-buddy-agent-1.14.12.jar)
-WARNING: If a serviceability tool is in use, please run with -XX:+EnableDynamicAgentLoading to hide this warning
-WARNING: If a serviceability tool is not in use, please run with -Djdk.instrument.traceUsage for more information
-WARNING: Dynamic loading of agents will be disallowed by default in a future release
-]]></system-err>
-  </testcase>
+  <testcase name="testSearchShortRouteAncestro" classname="co.edu.uptc.controller.RouteTreeTest" time="0.004"/>
   <testcase name="testSearchShortestPathBFS_whenGraphHasShortcut" classname="co.edu.uptc.controller.RouteTreeTest" time="0.002"/>
   <testcase name="testEditAndDelete" classname="co.edu.uptc.controller.RouteTreeTest" time="0.001"/>
   <testcase name="testSearchRecPath" classname="co.edu.uptc.controller.RouteTreeTest" time="0.001"/>
-  <testcase name="testSaveCalledOnInsert" classname="co.edu.uptc.controller.RouteTreeTest" time="0.004"/>
-  <testcase name="testInsertAndExists" classname="co.edu.uptc.controller.RouteTreeTest" time="0.001"/>
+  <testcase name="testSaveCalledOnInsert" classname="co.edu.uptc.controller.RouteTreeTest" time="0.002"/>
+  <testcase name="testInsertAndExists" classname="co.edu.uptc.controller.RouteTreeTest" time="0.002"/>
 </testsuite>

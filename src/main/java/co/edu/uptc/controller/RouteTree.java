@@ -3,7 +3,6 @@ package co.edu.uptc.controller;
 import co.edu.uptc.model.Node;
 import co.edu.uptc.model.Station;
 import co.edu.uptc.persistence.PersistenceManager;
-import co.edu.uptc.persistence.PersistenceException;
 
 import jakarta.xml.bind.annotation.XmlAccessType;
 import jakarta.xml.bind.annotation.XmlAccessorType;
@@ -11,8 +10,6 @@ import jakarta.xml.bind.annotation.XmlElement;
 import jakarta.xml.bind.annotation.XmlRootElement;
 
 import java.util.*;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
  * Lógica del árbol N-ario que modela las estaciones y sus conexiones.
@@ -28,7 +25,6 @@ import java.util.logging.Logger;
 @XmlAccessorType(XmlAccessType.FIELD)
 public class RouteTree {
 
-    private static final Logger LOGGER = Logger.getLogger(RouteTree.class.getName());
     private static final String FILE_PATH = "src/main/resources-data/routes.xml";
 
     @XmlElement(name = "root")
@@ -43,12 +39,9 @@ public class RouteTree {
                 this.root = null;
             }
         } catch (Exception e) {
-            LOGGER.log(Level.WARNING, "No se pudo cargar RouteTree desde persistencia: " + e.getMessage(), e);
             this.root = null;
         }
     }
-
-    /* -------------------- CRUD básico -------------------- */
 
     public Node getRoot() { return root; }
     public void setRoot(Node root) { this.root = root; }
@@ -68,7 +61,7 @@ public class RouteTree {
         if (root == null) {
             if (parentCode == null) {
                 root = new Node(newStation);
-                save(); // Propagará la excepción si algo falla
+                save();
                 return true;
             } else {
                 return false;
@@ -79,7 +72,7 @@ public class RouteTree {
         if (existsLocation(root, name)) return false;
         boolean inserted = insertRec(root, newStation, parentCode);
         if (inserted) {
-            save(); // Propagar la excepción si algo falla
+            save();
             return true;
         }
         return inserted;
@@ -103,12 +96,12 @@ public class RouteTree {
         if (code == null || root == null) return false;
         if (root.getStation() != null && code.equals(root.getStation().getCode())) {
             root = null;
-            save(); // Propagar la excepción si algo falla
+            save();
             return true;
         }
         boolean removed = removeRec(root, code);
         if (removed) {
-            save(); // Propagar la excepción si algo falla
+            save();
             return true;
         }
         return removed;
@@ -136,11 +129,9 @@ public class RouteTree {
         if (node.getStation() == null) return false;
         node.getStation().setLocation(newLocation);
         node.getStation().setCode(newCode);
-        save(); // Propagar la excepción si algo falla
+        save();
         return true;
     }
-
-    /* -------------------- Búsquedas -------------------- */
 
     /**
      * Busca recursivamente un nodo por su location (devuelve path desde 'start' hasta el nodo).
@@ -193,6 +184,7 @@ public class RouteTree {
     }
 
     /**
+     * Por implementar dentro de RouteTree.
      * Busca la ruta más corta entre dos estaciones considerando el grafo implícito (padre-hijo bidireccional).
      * Usa BFS y devuelve la lista de Station desde origen hasta destino (inclusive).
      * Esta función es la que garantiza la ruta con menor número de aristas en grafos no dirigidos.
@@ -279,6 +271,7 @@ public class RouteTree {
         collectRoutes(root, routes);
         return routes;
     }
+    
     private void collectRoutes(Node cur, List<Station> out) {
         if (cur == null || cur.getStation() == null) return;
         out.add(cur.getStation());
@@ -289,7 +282,6 @@ public class RouteTree {
         try {
             PersistenceManager.getInstance().getRouteDAO().save(this, FILE_PATH);
         } catch (Exception e) {
-            LOGGER.log(Level.SEVERE, "Error guardando RouteTree: " + e.getMessage(), e);
             throw new RuntimeException("Error al guardar el árbol de rutas.", e);
         }
     }
