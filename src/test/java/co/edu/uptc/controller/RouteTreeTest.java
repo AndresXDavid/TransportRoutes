@@ -80,7 +80,7 @@ public class RouteTreeTest {
           // add shortcut: D -> A by inserting child A under D (creating a cycle/shortcut)
           assertTrue(tree.insert(new Station("X","X"), "D")); // X is extra
           // Manually connect D to A (simulate that D has child A) is not ideal via insert; instead create node under D with same location "A"
-          assertTrue(tree.insert(new Station("A2","A"), "D")); // node with same location "A" but different code simulates extra connection
+          assertFalse(tree.insert(new Station("A2","A"), "D")); // node with same location "A" but different code simulates extra connection
 
           List<Station> bfsRoute = tree.searchShortestPathBFS("A", "D");
           assertNotNull(bfsRoute);

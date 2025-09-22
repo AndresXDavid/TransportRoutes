@@ -17,4 +17,5 @@ module co.edu.uptc {
     exports co.edu.uptc.persistence;
     exports co.edu.uptc.model;
     exports co.edu.uptc.viewController;
+    exports co.edu.uptc.utils;
 }
